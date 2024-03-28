@@ -1,0 +1,158 @@
+# Ejercicio 1 {.unnumbered}
+
+1.  Abre R y crea un nuevo script en tu sesión.
+
+
+2.  Agrega un fragmento de código e imprime tu directorio de trabajo para asegurarte
+de que estás en el lugar correcto.
+
+
+3.  Agrega un nuevo fragmento de código que pueda importar la base de datos de 
+[Bunker y Negretto 2023](https://github.com/kennethbunker/uss/tree/main/estadistica2)
+a RStudio. Puedes revisar el script de ese trabajo y descargar los datos de 
+[aquí](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/QPA1T3).
+
+
+4. Si no puedes, prueba con el siguiente código:
+  
+``` r
+install.packages("RCurl")
+library(RCurl)
+x <- getURL(https://raw.githubusercontent.com/kennethbunker/uss/main/estadistica2/data/latam.csv)
+dataframe <- read.csv(text = x)
+```
+
+
+5.  Una vez que se hayan importado los datos, responde las siguientes preguntas en su script:
+  
+  -   ¿De qué se trata la base de datos?
+  -   ¿Cuál es la unidad de análisis para esta base de datos?
+  -   Definir una variable dependiente de interés
+
+
+6.  ¡Propone una variable dependiente para tu investigación!
+  
+  
+  7.   Exploremos la base de Bunker y Negretto (2023):
+  
+  
+  $H_0$: A medida que aumenta la magnitud de distrito, no aumenta la fragmentación
+del sistema de partidos.
+
+$H_1$: A medida que aumenta la magnitud de distrito, aumenta la fragmentación del
+sistema de partidos.
+
+
+. . .
+
+
+- ¿Cuáles son los conceptos?
+  - ¿Cómo se operacionalizan?
+  - ¿Cómo se relacionan (cuál es la dependiente)?
+  - ¿Cómo se vería un gráfico en cada una de estas hipótesis?
+  
+  
+  . . .
+
+
+``` r
+## arreglar la base de datos
+df <- dataframe ## cambiar de nombre la base
+
+
+## fijar zona de ploteo
+par(mar=c(1,1,1,1)) ## definir tamaño del plot
+par(mar = c(4.1, 4.4, 4.1, 1.9))
+
+
+## cuántos casos hay de chile?
+table(df$country_name =="Chile")
+
+
+## valor máximo de variable
+max(df$enpv_bn)
+max(df$dep_dm)
+
+
+## valor mínimo de variable
+min(df$enpv_bn)
+min(df$dep_dm)
+
+
+## promedio de variable
+mean(df$enpv_bn)
+mean(df$dep_dm)
+
+
+## desviación estándar
+sd(df$enpv_bn)
+sd(df$dep_dm)
+
+
+## resumen de las variables
+summary(df$enpv_bn)
+summary(df$dep_dm)
+
+
+## resumen gráfico de las variables
+boxplot(df$enpv_bn)
+
+
+## boxplot producido
+bp <- boxplot(enpv_bn ~ country_name, data = df, xaxt = "n")
+tick <- seq_along(bp$names)
+axis(1, at = tick, labels = FALSE)
+text(tick, par("usr")[3] - 8, bp$names, srt = 90, xpd = TRUE)
+
+
+## cerrar gráfico
+#dev.off()
+
+
+## density plot
+hola <- density(df$enpv_bn)
+plot(hola)
+plot(hola, main="Número de Partidos (enpv_bn)")
+
+
+## correlación y regresión
+cor(df$dep_as_1tier, df$dep_dm)
+
+
+## regresión simple
+reg <- lm(df$dep_dm ~ df$dep_as_1tier)
+summary(reg)
+
+
+## regresión lineal multiple
+reg2 <- lm(df$enpv_bn ~ df$dep_dm + df$dep_as_1tier)
+summary(reg2)
+
+
+## un gráfico simple con todos los datos
+plot(df$dep_dm, df$enpv_bn)
+abline(reg, col="red") # agregar linea
+
+
+## otro gráfico simple con una muestra de los datos
+df2 <- subset(df, dep_dm < 10)
+plot(df2$dep_dm, df2$enpv_bn)
+abline(reg, col="green") # agregar linea
+
+
+## un tercer gráfico simple con una muestra de los datos
+df3 <- subset(df, country_name == "Chile")
+plot(df3$dep_dm, df3$enpv_bn)
+abline(reg, col="blue") # agregar linea
+
+
+## un cuarto gráfico simple con
+## una muestra de los datos (otra IV)
+plot(df$dep_as_1tier, df$enpv_bn)
+abline(reg, col="blue") # agregar linea
+
+
+## REVISAR DETALLES TÉCNICOS DE VARIABLES (4 plots)
+plot(reg)
+
+```
