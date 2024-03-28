@@ -1,0 +1,1750 @@
+###############################################################################
+##########################Práctico 1 Estadística 1#############################
+##########################      16/08/2022        #############################
+###############################################################################
+
+#####################Descarga e instalación de R y RStudio#####################
+
+# 1. Instalación de R.
+
+# Visitar la página https://cran.r-project.org/ y descargar para el sistema
+# operativo de interés. Aceptar la configuración por defecto, y en el idioma
+# que les acomode (R for Windows/R for Linux/R for OS Mac).
+
+# 2. Instalación de RStudio.
+
+# Visitar la página https://www.rstudio.com/products/rstudio/download/#download
+# y descargar la versión más nueva. Identificar el sistema operativo que emplea 
+# el PC o notebook, y descargarla (la primera que aparece es Windows, y las
+# opciones restantes aparecen más abajo en la misma página). En este caso, 
+# dado que las versiones más actuales tienen varios meses de antigüedad, 
+# sugiero su instalación y empleo, tanto en R como en RStudio.
+
+# 3. Ejecución del programa
+
+# Se recomienda encarecidamente emplear R abriendo solamente RStudio, dado que
+# este último es el entorno computacional de R. Es más amable y sencillo de 
+# usar, por lo cual siempre usaremos RStudio.
+
+# 4. Comandos básicos de teclado:
+
+# ctrl + enter = ejecución de un comando.
+# ctrl + shift + c = introducción de comentario (notas al lado del #, o gato).
+# alt + c = introducción del operador flecha (<-), para indicar al vector 
+# los elementos de que estará dotado.
+# ctrl + s = guardar archivo.
+# ctrl + - = alejar pantalla.
+# ctrl + botón más (+) = aumentar pantalla. 
+# ctrl + o = abrir archivo.
+# shift + 3 = #
+
+
+####R como calculadora----
+
+# 5. La función más básica de R: la calculadora.
+
+# R permite la ejecución de numerosos cálculos matemáticos, dado que tiene 
+# incorporado un conjunto de funciones para tal efecto.
+
+# Operaciones fundamentales: suma, resta, multiplicación y división.
+
+10 + 20
+30 - 15
+300 * 200
+250 / 125
+
+# Otras operaciones: potencias, raíces, logaritmos, función exponencial.
+
+100 ^ 2 #Esto indica que 100 se eleva a 2.
+sqrt(16) #Se busca obtener la raíz cuadrada de 16.
+log2(100) #Se calcula el logaritmo en base 2 de 100.
+log(1000, base = 3) #Se calcula el logaritmo en base 3 de 1.000.
+log(3.16) #Se calcula el logaritmo natural de 3,16.
+exp(1) #Se calcula la función exponencial de 1, que tiene como resultado 'e'.
+
+# También podemos obtener raíces de orden superior a 2.
+
+649 ^ 1/4 #Raíz cuarta de 649.
+500 ^ 1/10 #Raíz décima de 500.
+
+# También se puede resolver funciones trigonométricas (en grados).
+
+sin(45)
+cos(45)
+tan(45)
+
+# Ahora, estas funciones trigonométricas las podemos calcular en radianes.
+
+sin(45 * 3.1416 / 180) #Esto es, por pi dividido en 180 grados.
+
+# Para funciones matemáticas más complejas, cabe recordar el orden en que se
+# resuelven los ejercicios: potencias, paréntesis, multiplicación/división y
+# suma/resta.
+
+(((25 + 16)^3)/sqrt(16)) + ((18^2+16^4/10)*(16/4))
+
+# Todo lo anterior no ha requerido de una sola librería especial para ser
+# resuelto. Sin embargo, hay dos componentes esenciales en R: los NA (not
+# available) y los NaN (not a number).
+
+# Algunas operaciones con NA y con NaN.
+
+NA * 24
+sqrt(NA)
+log(NA)
+
+NaN + 2
+NaN - 5
+NaN * 16
+NaN / 16
+
+# Los NA y los NaN absorben a todas las operaciones que se hagan con ellos a
+# nivel de cálculo inicial, aunque ambos elementos apuntan a conceptos
+# diferentes. Mientras el NA alude a datos que no fueron registrados por
+# algún motivo, mientras que los NaN se producen por operaciones que no se
+# pueden ejecutar por no tener sentido, o porque su resultado no existe.
+
+# Ejemplo: división por cero.
+
+0 / 0
+16 / 0 # En este caso, el resultado se expresa como 'Inf' (infinito).
+-18000 / 0 # En este caso, se obtiene '-Inf', ya que el numerador es negativo.
+
+
+#####El vector: la unidad fundamental----
+
+# 6. El vector: constituye una unidad compuesta de un grupo ordenado de 
+# elementos, que deben ser del mismo tipo. Por ende, los vectores tienen tres
+# características relevantes: tipo, largo y atributo. El tipo se refiere a que
+# un vector será de la misma clasificación que sus datos. El largo, por su 
+# parte, indicará la cantidad de datos que posee el vector, dado que es de
+# columna única. Luego, el atributo apunta a describir una característica del
+# vector en metadatos. De este modo, solo nos interesan el tipo y el largo.
+
+# Generemos un vector
+
+c(1:10) 
+
+# Concatenamos (c) los números del 1 al 10 de forma consecutiva como
+# nuestro vector. El problema es que no queda guardado, ya que no lo
+# hemos asignado a una ubicación definida. Para esto, hay que asignarlo a un
+# vector ya existente, o crear uno nuevo, por ejemplo, como "mi_vector".
+
+mi_vector <- c(1:10)
+mi_vector
+
+# Ahora que nuestro vector está almacenado, crearemos un segundo vector:
+
+mi_vector_2 <- c(2,2,3,4,6,8,9,11,13,10)
+mi_vector_2
+
+# Ocuparemos comandos para ver las características de nuestros vectores.
+
+length(mi_vector) #Largo del vector.
+length(mi_vector_2)
+
+class(mi_vector) #Clase del vector. Este es de número entero (integer).
+class(mi_vector_2) #Este es de clase numérica.
+
+typeof(mi_vector) #Se confirma que es entero.
+typeof(mi_vector_2) #Se confirma que es de doble número.
+
+# A los vectores les podemos aplicar numerosas operaciones matemáticas. Entre
+# muchas otras, tenemos:
+
+sqrt(mi_vector)
+sum(mi_vector)
+prod(mi_vector)
+log(mi_vector)
+sin(mi_vector)
+log(mi_vector, base = 5)
+
+mi_vector_2 * 5
+mi_vector_2 ^ 10
+mi_vector_2 / 8
+
+# Incluso podemos aplicar algunas operaciones estadísticas básicas:
+
+mean(mi_vector_2) # Media
+mean(mi_vector)
+
+median(mi_vector_2) #Mediana
+median(mi_vector)
+
+sd(mi_vector_2) #Desviación estándar
+sd(mi_vector)
+
+var(mi_vector_2) #Varianza
+var(mi_vector)
+
+range(mi_vector_2) #Rango
+range(mi_vector)
+
+max(mi_vector_2) #Máximo valor del vector.
+max(mi_vector)
+
+min(mi_vector_2) #Mínimo valor del vector.
+min(mi_vector)
+
+summary(mi_vector_2) #Resumen estadístico general de los datos
+summary(mi_vector)
+
+# No obstante, hay operaciones fundamentales entre vectores que tenemos que
+# conocer con miras a trabajar bases de datos completas como lo son
+# los operadores lógicos. Estas son:
+repasarrrrrr
+
+mi_vector | mi_vector_2 #Operador 'o', en el cual los dos enunciados deben ser
+# falsos para que el resultado también lo sea.
+
+mi_vector & mi_vector_2 #Operador 'y', en el cual los dos enunciados deben ser
+#verdaderos para que el resultado también lo sea.
+
+mi_vector == mi_vector_2 #Operador 'es igual a', en el cual los elementos deben
+#coincidir, o el resultado es falso.
+
+mi_vector != mi_vector_2 #Operador 'es distinto de' o 'no es igual a'.Si son
+#distintos, es verdadero, de lo contrario, es falso.
+
+mi_vector > mi_vector_2 #Lo que decimos es que mi_vector es mayor que 
+#mi_vector_2.
+
+mi_vector < mi_vector_2 #mi_vector es menor que mi_vector_2.
+
+mi_vector >= mi_vector_2 #mi_vector es mayor o igual que mi_vector_2.
+
+mi_vector <= mi_vector_2 #mi_vector es menor o igual que mi_vector_2.
+
+
+####Retomando los vectores----
+
+# 1. Como mencionamos anteriormente, los vectores son las unidades fundamenta-
+# les de información de R, toda vez que poseen un conjunto de unidades del mis-
+# mo tipo en una columna también única. Sobre estas últimas, podemos obtener
+# sus ubicaciones sin mayores dificultades, para lo cual se tiene que ocupar
+# el código de posición '[]'.Tenemos, al efecto, los siguientes vectores, a
+# los que se les da ctrl + enter:
+
+soy_genial <- c(3,8,12,16,18,20)
+
+si_soy_genial <- c(3,6,7,18,24,32)
+
+inmortal <- c(3,5,6,12,15,17)
+
+# Busquemos las siguientes posiciones:
+
+soy_genial[1]
+
+si_soy_genial[5]
+
+inmortal[3]
+
+# Ahora, busquemos más de una posición que sean correlativas:
+
+soy_genial[1:3]
+
+si_soy_genial[2:4]
+
+inmortal[3:5]
+
+# No obstante, ¿qué pasa cuando las posiciones no son correlativas?
+# Aquí nos acompaña el amigo 'concatenar' (c):
+
+soy_genial[c(1,3)]
+
+si_soy_genial[c(2,4,5)]
+
+inmortal[c(1,3,5,6)]
+
+# Como recordatorio, sin embargo, si no se aplica sobre los vectores el co-
+# mando igual (=), o concatenar (c) junto al comando flecha (<-), el cambio
+# no se guarda, ya que R no comprende sin estos elementos la orden que se le
+# imparte. Supongamos que queremos, por un momento, cambiar algunos elementos
+# 'soy_genial':
+
+soy_genial <- c(3,8,12,16,'quiero dormir', TRUE)
+
+# Con esto, se registró el cambio. Démosle ctrl + enter a 'soy_genial':
+
+soy_genial
+
+
+# ¿Qué pasó con el amigo 'soy_genial'? Ahora todos los elementos se marcaron
+# con comillas ¿Porqué? Discutámoslo un momento antes de avanzar en el código:
+
+
+# Nuevamente, vamos con 'soy_genial':
+
+soy_genial
+
+# Lo que ha ocurrido es que, para R, la unidad de información más común, y por
+# ello, general, es el texto, con lo cual bastó que una unidad se presentara
+# entre comillas para que R comprendiera que es un texto. Esto lleva a R
+# a entender que, para hacer a los vectores de unidad única, transformó todos
+# los elementos en texto. Este proceso de forzar la transformación es el
+# principio de coerción, es decir, el proceso por el cual R fuerza a todas 
+# unidades a constituir un vector con el mismo tipo de elemento. Volvamos,
+# por un momento a 'soy_genial' actualizado, pero identificando su tipo:
+
+str(soy_genial)
+typeof(soy_genial)
+
+# Ahora, volvamos al 'soy_genial' original:
+
+soy_genial <- c(3,8,12,16,18,20)
+
+str(soy_genial)
+typeof(soy_genial)
+
+# Del ejercicio anterior, se desprende dos tipos de unidades de un vector:
+# los caracteres y los números 'dobles'. En el primer caso, cuando un vector
+# posee solo texto, estamos ante un 'string' o una 'cuerda', y en el segundo
+# ante un vector numérico. Si quiero aplicar el principio de coerción de 
+# los vectores, tenemos que:
+
+si_soy_genial
+
+si_soy_genial <- c(3,'6',7,18,24,32)
+
+str(si_soy_genial)
+typeof(si_soy_genial) #En pocas palabras, este vector pasa a ser un string.
+
+# Ahora, forcemos su cambio a vector numérico:
+
+as.numeric(si_soy_genial)
+
+# Luego, pensemos en un vector que posee dos valores: 0 y 1:
+
+rueditas_chiquititas <- c(0,1,0,1,1,1,1,0,0,0,1)
+
+str(rueditas_chiquititas)
+typeof(rueditas_chiquititas)
+
+# Pensemos, por un momento, en que necesitamos que 'rueditas_chiquititas'
+# pase a convertirse en un vector lógico. Entonces, forcemos su cambio con
+# coerción:
+
+rueditas_chiquititas
+
+as.logical(rueditas_chiquititas)
+
+# El principio de coerción convirtió a 'rueditas_chiquititas' en un vector
+# lógico que, conforme a los planteamientos del álgebra booleana, solo
+# adopta dos valores numéricos: 0 y 1. Estos equivalen, bajo dicha 
+# perspectiva del álgebra, a falso y verdadero, respectivamente, o bien,
+# a 'no pertenece' y 'pertenece' a un conjunto, si queremos pensar en los
+# llamados 'conjuntos difusos' (fuzzy sets). No obstante, vamos con la
+# coerción nuevamente, pero sobre el vector lógico 'rueditas_chiquititas':
+# los 0 son "falsos"/"no", los 1 son "verdaderos"/"si".
+
+rueditas_chiquititas
+
+# Sin embargo, no guardamos el cambio, por lo cual necesitamos la flecha y
+# concatenar para transformar el vector:
+
+rueditas_chiquititas <- as.logical(rueditas_chiquititas)
+
+str(rueditas_chiquititas)
+typeof(rueditas_chiquititas)
+
+# ¿Qué tal si ahora hacemos que 'rueditas_chiquititas' se convierta en un
+# factor?
+
+as.factor(rueditas_chiquititas)
+
+# Como se puede observar, ahora hemos forzado la transformación del vector
+# al tipo factor, en donde los niveles son categorías.
+
+# ¿Cómo guardamos el cambio de tipo de vector de 'rueditas_chiquititas'?
+# ¡Ejecútenlo! :-)
+
+#R:
+# Vector original de tipo numérico
+vector_numerico <- c(1.5, 2.7, 3.9)
+
+# Cambiar el tipo de vector a caracter
+vector_caracter <- as.character(vector_numerico)
+
+# Mostrar el nuevo vector
+print(vector_caracter)
+
+###
+
+# Sobrescribir el vector original con el nuevo tipo
+vector_numerico <- as.character(vector_numerico)
+
+
+# Volvamos a 'rueditas_chiquititas' como vector lógico:
+
+rueditas_chiquititas <- as.logical(rueditas_chiquititas)
+
+# Luego, creemos un vector entero, denominado 'rodillas_peladas':
+
+rodillas_peladas <- c(1.5,2.4,3.6,-2,-4-6)
+
+str(rodillas_peladas)
+typeof(rodillas_peladas)
+
+# Ahora, forcemos su cambio a números enteros:
+
+rodillas_peladas <- as.integer(rodillas_peladas)
+
+str(rodillas_peladas)
+typeof(rodillas_peladas)
+
+# Como se puede observar, los números enteros se obtienen del conjunto 'Z',
+# conforme a las indicaciones del álgebra. Estos se caracterizan por contener
+# a los números positivos y los números negativos junto con el cero, sin 
+# ningún tipo de fracción si no conduce a un número con residuo 0 y sin
+# decimales. 
+
+# Volveremos en la siguiente clase sobre este tipo de aclaraciones.
+
+# Por ahora, recordemos los tipos de vectores que podemos obtener:
+#ustedes:
+
+# estos vectores transforman los datos de un tipo a otro
+#
+as.numeric(rodillas_peladas) #entero 
+as.logical(rodillas_peladas) #numerico
+as.factor(rodillas_peladas) #cadena de texto
+as.integer(rodillas_peladas) #factor
+as.logical(rodillas_peladas) #logico
+as.character(rodillas_peladas) #NULL
+
+#todas las funciones aceptan como argumento datos o vectores
+
+
+# Pensemos que, sobre los vectores numéricos podemos aplicar todas las ope-
+# raciones típicas de una calculadora:
+
+soy_genial * 2
+soy_genial + 6
+sqrt(soy_genial)
+
+log(si_soy_genial) #En este sentido, no se puede aplicar logaritmo natural
+#a un texto, ya que para R no tiene sentido matemático
+#alguno, pero intenta resolverlo de todos modos.
+
+# Veamos ahora lo que pasa si convertimos a 'inmortal' en un factor para
+# operar con él:
+
+inmortal <- as.factor(inmortal)
+inmortal
+
+inmortal*2 #Nuevamente R registra un error, toda vez que una operación mate-
+#mática no tiene sentido en un factor, aunque R sí trata de resol-
+#ver el problema.
+
+# Ahora, transformemos a 'inmortal' en un vector entero:
+
+inmortal <- as.integer(inmortal)
+inmortal
+
+inmortal*2
+
+# El vector entero es una especificación mayor de un vector numérico, por
+# lo cual tenemos que:
+
+inmortal <- as.numeric(inmortal)
+inmortal
+
+inmortal <- as.integer(inmortal)
+inmortal
+
+str(inmortal)
+typeof(inmortal)
+
+# Finalmente, generemos dos vectores: pepe_lota y freddy_turbina.
+
+pepe_lota <- c(1,0,0,0,0,1,1,1,1,1,0)
+
+freddy_turbina <- c(0,0,0,1,1,0,0,1,1,1,1)
+
+# Comparémoslos a ambos como vectores lógicos ¡Es la coerción, muchachos!:
+
+pepe_lota <- as.logical(pepe_lota)
+
+freddy_turbina <- as.logical(freddy_turbina)
+
+# Apliquemos los operadores lógicos:
+
+pepe_lota & freddy_turbina #Operador y.
+
+pepe_lota | freddy_turbina #Operador o.
+
+pepe_lota > freddy_turbina #Operador mayor que.
+
+pepe_lota < freddy_turbina #Operador menor que.
+
+pepe_lota <= freddy_turbina #Operador menor o igual que.
+
+pepe_lota >= freddy_turbina # Operador mayor o igual que.
+
+pepe_lota != freddy_turbina #Operador distinto de.
+
+!pepe_lota #Negación de 'pepe_lota'
+
+# ----------------------------------------------------------------------------
+####Retomamos lo visto en la última clase.----
+# ----------------------------------------------------------------------------
+
+# Comencemos con un vector llamado 'dinosaurio', y un segundo llamado 
+# 'anacleto':
+
+dinosaurio <- c(2,4,5,7,9,10,16,22)
+anacleto <- c(3,4,5,6,8,14,15,22)
+
+# Retomando los conectores lógicos:
+
+dinosaurio == anacleto
+
+dinosaurio > anacleto # Esto mismo aplica para 'mayor o igual que'.
+
+dinosaurio < anacleto # Esto mismo aplica para 'igual o menor que'
+
+dinosaurio & anacleto # Esto último no guarda mayor sentido, dado que todo
+# número igual o superior a 1 en R es verdadero.
+# En lo formal, el ejercicio es correcto.
+
+dinosaurio | anacleto # Igual observación aplica en este caso.
+
+# Lo importante en el plano de los conectores lógicos es darle una orden 
+# consistente a R para que haga su trabajo.Por ejemplo:
+
+anacleto[anacleto < 8]
+anacleto[anacleto <= 14] # aquí le decimos a R que haga aparecer los elementos
+# de 'anacleto' que son menores o iguales a 14.
+
+dinosaurio[dinosaurio >= 9]
+dinosaurio[dinosaurio == 9] # aquí indicamos que se deben seleccionar los
+# datos de dinosaurio que son iguales o mayores
+# que 9, y a aquellos que son iguales a 9,
+# respectivamente.
+
+# ¿Qué pasa cuando queremos aplicar dos condiciones especiales?
+
+#denle su corte:D
+
+# ----------------------------------------------------------------------------
+####Aplicación una pequeña función para empezar a automatizar 'which'.----
+# ----------------------------------------------------------------------------
+
+# Diseñamos un nuevo vector denominado 'mantequilla'
+
+mantequilla <- c(67.0,90.0,87.3,75.8,71.4,99.2,69.5,70.9,81.1)
+
+# Filtramos a 'mantequilla', para seleccionar algunos datos específicos.
+
+mantequilla_2 <- which(mantequilla > 80.0 & mantequilla < 90.0)
+mantequilla_3 <- which(mantequilla >= 75.0 & mantequilla <= 85.0)
+
+# Veamos la condición 'o' enlazando otras dos condiciones con el vector
+# dua_lipa()
+
+dua_lipa <- c(1:10)
+dua_lipa_2 <- which(dua_lipa < 3 | dua_lipa > 8)
+dua_lipa_2
+
+# La idea detrás de la función which consiste en establecer funciones lógicas
+# encadenadas, a fin de que R ejecute funciones un poco más complejas. Esto
+# nos servirá para entrar en arreglos (arrays), matrices y listas la próxima
+# semana.
+
+
+# ----------------------------------------------------------------------------
+####Directorios y apertura de librerías.----
+# ----------------------------------------------------------------------------
+
+# Primero, estableceremos una carpeta fija para trabajar. Para esto, primero
+# identificamos la carpeta en la que se almacenan actualmente nuestros 
+# archivos.
+
+getwd()
+
+# Luego, establecemos una carpeta de trabajo para almacenar nuestra 
+# información:
+
+setwd()
+
+# Si queremos identificar el contenido de nuestra carpeta, ocupamos la función
+# dir().
+
+dir()
+
+# Ahora que nos cercioramos que nuestra carpeta es la correcta, procedemos a 
+# abrir tres paquetes a través de la función library().
+
+library(psych)
+library(gds)
+
+# Sin embargo, como no tenemos los paquetes 'psych' ni 'gds', entonces tene-
+# que ocupar la función install.packages
+
+install.packages('psych', dependencies = T) 
+install.packages('gds', dependencies = T) # Se indica, para cada caso,
+# el paquete a instalar y sus
+# paqueter dependientes.
+
+# Una forma de automatizar este proceso es a través de la función if:
+
+if (!require('psych')){
+  install.packages('psych', dependencies = T)
+}
+
+if (!require('gds')){
+  install.packages('gds', dependencies = T)
+}
+
+# Lo que le estamos pidiendo a R en este último caso es que cargue los
+# paquetes solicitados y, de no estar instalados, los instale.
+
+
+# ----------------------------------------------------------------------------
+####Estadística descriptiva para datos no agrupados.----
+# ----------------------------------------------------------------------------
+
+# Supongamos que tenemos el vector llamado 'timmy':
+
+timmy <- c(0.2,0.3,0.55,0.67,0.78,0.12,1.0,0.25,0.75,0.88,0.92,0.45,0.52,
+           0.17,0.33,0.99,0.41,0.5,0.39,0.66)
+timmy
+
+# Aplicamos las operaciones estadísticas elementales para datos no agrupados:
+
+mean(timmy) # Media aritmética.
+sd(timmy)   # Desviación estándar.
+median(timmy) # Mediana.
+max(timmy)    # Valor máximo.
+min(timmy)    # Valor mínimo.
+var(timmy)    # Varianza.
+range(timmy)  # Rango.
+
+# No obstante, la presentación de estas funciones se cargan de un modo poco
+# elegante, dado que muchos de estos elementos se pueden sintetizar en una
+# sola línea de código con la función summary()
+
+summary(timmy)
+
+# Una alternativa adicional consiste en emplear la función skim(). Para esto,
+# hay que verificar que esté instalado. De lo contrario, lo instalaremos:
+
+if (!require('skimr')){
+  install.packages('skimr', dependencies = T)
+}
+
+library(skimr) # Abrimos el paquete skimr.
+
+skim(timmy)    # Aplicamos el resumen de datos con mayores características.
+
+
+# ---------------------------------------------------------------------------
+####Estadística para datos agrupados (I).----
+# ---------------------------------------------------------------------------
+
+# Volvamos al vector 'timmy':
+
+timmy
+
+# Ahora, necesitamos convertir en un objeto la extensión del vector 'timmy':
+
+a <- length(timmy)
+a <- as.numeric(a)
+a
+
+# Luego, hay que obtener el mínimo y el máximo de 'timmy' para calcular el
+# rango:
+
+b <- min(timmy)
+b
+
+c <- max(timmy)
+c
+
+d <- c - b
+d
+
+# Después, aplicamos la regla de Sturges vista en clases:
+
+e <- round(1 + 3.3*log(a, base = 2),0)
+e
+
+# Después, dividimos el rango en el coeficiente obtenido con la regla de
+# Sturges:
+
+f <- d/e
+f
+
+# Ahora, preparamos los elementos necesarios para armar nuestro cuadro de 
+# estadística descriptiva:
+
+g <- cut(timmy, # Data o vector que vamos a emplear.
+         seq(b, c, by = f), # Secuencia desde el valor mínimo al máximo por f.
+         include.lowest = T) # Indicamos que incluiremos el valor más bajo.
+g
+
+# Con table() vamos a ver las clases conformadas para agrupar los datos.
+
+table(g)
+
+# Crearemos una tabla llamada 'plano'
+
+plano <- as.data.frame(table(g)) # R creará un objeto con formato data.frame.
+plano
+
+plano$freac <- cumsum(plano$Freq) # R crea una columna de frecuencia acumulada.
+plano
+
+plano$frel <- plano$Freq/a # R crea una columna de frecuencia relativa.
+plano
+
+plano$frelac <- cumsum(plano$frel) # R crea una columna de frecuencia relativa
+# acumulada.
+plano
+
+# Comprobamos los resultados
+
+sum(plano$Freq)
+sum(plano$frel)
+
+
+# ----------------------------------------------------------------------------
+####Estadística para datos agrupados (II).----
+# ----------------------------------------------------------------------------
+
+# Tenemos una tabla de estudiantes con sus notas de la última solemne,
+# las que se ordenan como se indica a continuación:
+
+grupo_a <- data.frame(Linf = c(1.0,2.0,3.0,4.0,5.0,6.0),
+                      Lsup = c(2.0,3.0,4.0,5.0,6.0,7.0),
+                      ni = c(1.8,2.5,3.3,4.7,5.1,6.6))
+
+# Ahora que está constituida la tabla, procedemos a obtener los estadísticos.
+
+desc_a <- gds(grupo_a$Linf, grupo_a$Lsup, grupo_a$ni)
+desc_a
+
+
+# ----------------------------------------------------------------------------
+#### Retomamos lo visto en la última clase.----
+# ----------------------------------------------------------------------------
+
+# Comencemos con un repaso de estadística descriptiva con una nueva función,
+# pero antes, procedamos a instalar las librerías de nuestro interés: 
+
+install.packages('psych', dependencies = T)
+install.packages('skimr', dependencies = T)
+install.packages('gds)', dependencies = T)
+
+# Si las librerías referidas ya están instaladas, entonces abrámoslas:
+
+library(psych)
+library(skimr)
+library(gds)
+library(ggplot2)
+
+# De acuerdo al último ejercicio de la sesión 3, tenemos una tabla de estudian-
+# tes con sus notas de la última solemne, las que se ordenan como se indica a 
+# continuación:
+
+grupo_a <- data.frame(Linf = c(1.0,2.0,3.0,4.0,5.0,6.0),
+                      Lsup = c(2.0,3.0,4.0,5.0,6.0,7.0),
+                      ni = c(1.8,2.5,3.3,4.7,5.1,6.6))
+
+# Ahora que está constituida la tabla, procedemos a obtener los estadísticos.
+
+desc_a <- gds(grupo_a$Linf, grupo_a$Lsup, grupo_a$ni)
+desc_a
+
+# Como se puede observar, hay estadísticos de datos agrupados más completos,
+# ya que obtenemos el coeficiente de variación, los percentiles, el sesgo,
+# la curtosis, entre otros estadísticos de interés:
+
+# -----------------------------------------------------------------------------
+#### Gráficos básicos.----
+# -----------------------------------------------------------------------------
+
+# Apliquemos la función data() para abrir alguna de las bases de datos automá-
+# ticas de R:
+
+data(iris)
+
+str(iris)
+
+# Tenemos un data.frame de 150 observaciones y cinco variables sobre las cuales
+# trabajar. Examinemos algunos gráficos:
+
+# El más simple de todos es plot():
+
+plot(iris$Sepal.Length, # Eje y.
+     iris$Petal.Length, # Eje x.
+     xlab = 'Largo del pétalo', # Etiqueta del eje X.
+     ylab = 'Largo del sépalo', # Etiqueta del eje Y.
+     main = 'Plantas por largo del pétalo y el sépalo', # Título del gráfico.
+     xlim = c(4.0,8.0),
+     ylim = c(0.0,8.0),
+     type = 'p', col = 'blue', lwd = 3) # Tipo, color y grueso de los datos.
+
+# Se le puede agregar una pléyade más de comandos y especificaciones al gráfico,
+# pero vamos con otro, como el histograma:
+
+hist(iris$Sepal.Length, #Vector de datos
+     probability = TRUE, #Para graficar poligono
+     col="lightblue", 
+     xlab = "Largo del sépalo", 
+     ylab="Densidad", 
+     main="Histograma de los sépalos")
+
+# Complementamos con las líneas y la concentración por intervalo:
+
+lines(density(iris$Sepal.Length), col = 'dark blue')
+rug(iris$Sepal.Length, col = 'red')
+
+# Gráfico de barra:
+
+barplot(table(iris$Species),
+        main = 'Cantidad de plantas por especie',
+        xlab = 'Especies',
+        ylab = 'Cantidad de especies',
+        border = 'black',
+        col = 'blue',
+        beside = T,
+        density = 10)
+
+# Gráfico de barra con más de un atributo:
+
+barplot(table(iris$Species, iris$Sepal.Width),
+        main = 'Cantidad de plantas por especie',
+        xlab = 'Especies',
+        ylab = 'Cantidad de especies',
+        border = 'black',
+        col = 'blue',
+        beside = T,
+        density = 10)
+
+# Gráfico de caja
+
+boxplot(iris$Species)
+boxplot(iris$Sepal.Length~iris$Species, data = iris)
+
+# ------------------------------------------------------------------------------
+# 1. Tipos de objetos.----
+# ------------------------------------------------------------------------------
+
+# Ya hemos estudiado en profundidad los vectores. Recuerden que estos tienen
+# un tipo de elemento en particular, con un largo definido y, por ende, todo
+# el vector tiene una estructura definida común a todos sus elementos.
+
+# Sin embargo, la realidad, comúnmente, nos impone elementos que son más com-
+# plejos, dado que cuentan con largo, ancho y profundidad. Los arreglos (o 
+# arrays) son objetos multidimensionales compuestos de elementos expresados
+# como capas. Para esto, pensemos en un queso laminado, en el cual cada lámi-
+# tiene unas dimensiones dadas con la cual el arreglo se manifiesta como 
+# objeto.
+
+# Dentro de R, sin embargo, las matrices, aunque son un objeto matemático pro-
+# de lo que denominamos "álgebra lineal", requieren del entendimiento de los
+# arreglos para poder ser comprendidos a cabalidad.Los cubos también se pueden
+# conformar a partir de un arreglo específico, en los cuales cada lámina del
+# cubo es una matriz.En definitiva, un arreglo es una matriz de matrices, y
+# todas las matrices son de las mismas dimensiones.
+
+# ------------------------------------------------------------------------------
+# 2. Arreglos o arrays.----
+# ------------------------------------------------------------------------------
+
+# Supongamos un vector inicial, denominado 'buzz':
+
+buzz <- seq(0.5, 25, by = 0.25)
+
+# Una vez creado 'buzz', hagamos un arreglo denominado 'woody':
+
+woody <- array(data = buzz, dim = c(5,5))
+
+print(woody) # El arreglo dispone en dos dimensiones el vector 'buzz'. Se da
+# el número de filas y el número de columnas en 'dim'.
+
+class(woody)
+
+str(woody)
+
+# Como se puede observar, 'woody' es una matriz, entendida esta como un arreglo
+# rectangular de datos de un largo y ancho definidos. Contiene vectores en su
+# interior, los que dan lugar a columnas y filas. En este caso, como el vector
+# es único, R le ordena organizar los datos en un sentido definido, que es de
+# arriba hacia abajo, y luego de izquierda a derecha.Sobre esta matriz se puede
+# ejecutar diversas operaciones
+
+woody * 5
+woody / 4
+woody - 2
+woody + 9
+sin(woody)
+log(woody)
+
+# Del mismo modo, podemos construir una segunda matriz para operar sobre 
+# 'woody', tal que:
+
+slingy <- array(data = seq(1, 10, by = 0.1), dim = c(5,5))
+
+slingy * woody
+slingy / woody
+slingy + woody
+slingy - woody
+
+slingy | woody
+slingy < woody
+slingy > woody
+
+# Como especificación, las matrices tienen que poseer las mismas dimensiones
+# para poder ejecutar operaciones entre ellas, o bien, se puede operar con un
+# vector sobre la matriz completa, como se ha visto antes.
+
+# Para los arreglos, sin embargo, se puede incorporar también el número de ca-
+# pas al completar la función dim() (dimensions). Para ejemplificar, creamos
+# un objeto denominado 'cara_de_papa':
+
+cara_de_papa <- array(data = buzz, dim = c(5,5,5))
+
+print(cara_de_papa)
+
+View(cara_de_papa)
+
+# Aquí aplican dos principios centrales en R: la coerción y el reciclado. El
+# primero nos indica que se forzarán las operaciones en R hasta poder concretar
+# la función ordenada hasta culminarla, o bien, arrojar error cuando no es
+# matemáticamente consistente lo que se ordena. El segundo indica que, de no 
+# haber suficientes elementos, se repetirá el vector en su orden original hasta
+# completar el requerimiento ordenado.
+
+# El arreglo, sin embargo, comparte propiedades de los vectores, partiendo por
+# que todos los objetos tienen que ser del mismo tipo o, de lo contrario, se
+# forzará a todos los elementos a un tipo de elemento único conforme al princi-
+# pio de coerción. De este modo, tenemos el vector 'oloroso_pete'
+
+oloroso_pete <- c('a',1,3,5,9,'quiero comer',NA)
+
+oloroso_pete2 <- array(data = oloroso_pete, dim = c(3,4,2))
+
+print(oloroso_pete2)
+
+# También operan las funciones y órdenes típicas de cualquier vector. Volvamos
+# por un momento con 'cara_de_papa':
+
+cara_de_papa[1,,] # Se llama a la primera fila.
+
+cara_de_papa[,3,] # Se invoca la tercera columna.
+
+cara_de_papa[,,2] # Se ordena hacer aparecer la segunda capa.
+
+cara_de_papa[,1,4] # Se trae la primera columna de la cuarta capa.
+
+cara_de_papa[3,,4] # Se trae la tercera fila de la cuarta capa.
+
+cara_de_papa[1,5,3] # Se llama a la primera fila de la quinta columna en la
+# tercera capa. Aparece un solo elemento.
+
+cara_de_papa[c(2,3),c(1,2),c(1,5)] # Se invocan los elementos ubicados en las 
+# filas 2 y 3, las columnas 1 y 2 y en las
+# capas 1 y 5.
+
+# Los arreglos se pueden modificar de todas las formas indicadas para los 
+# vectores. Cuando se establece un elemento fijo, no aplica el principio de 
+# reciclado de los elementos, como cuando se ocupa un comando del tipo
+# mi_array[1,,] <- 1
+
+# Por otro lado, podemos diseñar un arreglo denominado 'bullet_club':
+
+bullet_club <- array(data = seq(1,8,by=0.25), dim=c(2,3,4),
+                     dimnames = list(c('balor','omega'),
+                                     c('edad','peso','altura'),
+                                     c('2019','2020','2021','2022')))
+
+print(bullet_club)
+
+# También puedo combinar arreglos con dimensiones iguales:
+
+toy_story <- rbind(woody,slingy)
+
+print(toy_story)
+
+# ------------------------------------------------------------------------------
+# 3. Matrices.----
+# ------------------------------------------------------------------------------
+
+# Para las matrices aplican todas las operaciones destinadas a los arreglos. 
+# Esto es cierto, toda vez que la matriz es un tipo específico de arreglo que 
+# posee solo dos dimensiones (filas y columnas).
+
+# Supongamos que queremos crear una matriz llamada 'zurg':
+
+zurg <- matrix(data = c(1:10), nrow = 4, ncol = 5)
+
+print(zurg)
+
+# Ahora, hagamos que el criterio base de despliegue del vector sea la fila:
+
+zurg_2 <- matrix(data = zurg, nrow = 4, ncol = 5, byrow = T)
+
+print(zurg_2)
+
+# Las operaciones señaladas anteriormente son válidas en la medida que el
+# número de elementos de las filas de la primera matriz es igual al número 
+# de columnas de la segunda matriz. Por ejemplo:
+
+matriz1 <- woody
+matriz2 <- slingy
+
+matriz1 %*% slingy # Producto puntual de dos matrices.
+
+# Trasposición de matrices: esto implica transformar la matriz con otro orden.
+# Volvamos a 'zurg':
+
+zurg
+t(zurg)
+
+# De este modo, se 'gira' la matriz para que cambie el sentido de la disposi-
+# ción de los elementos, de modo tal que se invierte la dimensionalidad,
+# así como la disposición de cada elemento.
+
+
+# ------------------------------------------------------------------------------
+# 1. Conjuntos.----
+# ------------------------------------------------------------------------------
+
+# El trabajo de teoría de conjuntos en R está contenido en su paquete base. Este
+# nos permite calcular las uniones, intersecciones, sumas, restas, el complemen-
+# to de un conjunto definido, entre otras operaciones. Por ejemplo, tenemos los
+# siguientes conjuntos:
+
+U <- c('a','b','c','d','e','f','g','h','i','j','k','l')
+A <- c('a','b','c','d','e')
+B <- c('e','f','g','h')
+
+# Como se puede observar, 'U' es el conjunto universo, mientras que 'A' y 'B'
+# son conjuntos que poseen diferentes elementos, salvo por el 'e', que es com-
+# partido por 'A' y 'B'. Si consideramos que la unión de dos conjuntos se refie-
+# re a la consideración de todos los elementos de ambos conjuntos, tenemos que:
+
+union(A,B)
+
+# Mientras que la intersección se define a partir de los elementos en común:
+
+intersect(A,B)
+
+# Luego, busquemos el complemento de A:
+
+setdiff(U,A)
+A
+
+# La función 'setdiff' nos indica los elementos que contienen el complemento de 
+# A, es decir, aquellos elementos que no contiene A, sino los conjuntos por fue-
+# ra de este último.
+
+# Por ejemplo, si ahora queremos buscar el complemento de A U B, tenemos:
+
+setdiff(U,union(A,B))
+
+# Ahora, si queremos obtener A - B, se expresa de la siguiente forma:
+
+setdiff(A,B)
+
+# Recuerden que la cardinalidad consiste en obtener el número de elementos de un
+# conjunto. Volvamos al ejemplo anterior, y obtengamos su cardinalidad:
+
+length(setdiff(A,B))
+
+# Hagamos otro ejercicio. Obtengamos los elementos, y luego hagamos el ejercicio
+# obteniendo la cardinalidad del enunciado de los conjuntos. Volvamos a A U B:
+
+union(A,B)
+length(union(A,B))
+
+length(A) + length(B) - length(intersect(A,B)) 
+
+# De esta manera, tenemos que A U B es igual a A + B - A int B.
+
+# ------------------------------------------------------------------------------
+# 2. Factoriales, permutaciones y combinaciones.----
+# ------------------------------------------------------------------------------
+
+# Recordemos que el factorial de un número se expresa como 'x!'. Por ejemplo, si
+# buscamos el factorial de 5, entonces tendremos que 5! es igual a 1*2*3*4*5. En
+# esta situación, el total es 120. Para calcular este resultado directamente, 
+# tenemos la función del paquete base, denominada 'factorial':
+
+factorial(5)
+
+# También cabe recordar las permutaciones son vitales para calcular las posibi-
+# lidades de combinación de determinados elementos de un conjunto cuando el or-
+# den sí importa. Si queremos establecer la fórmula Pk^n = n!/(n-k)!, ocupamos
+# el siguiente procedimiento:
+
+permutacion <- function(n,k){
+  return(factorial(n)/factorial(n-k))
+}
+
+# Con la función 'function', hemos creado dentro de R la función de permutación.
+# Luego, procedemos a incorporar la librería 'gtools' y la activamos. Dado que
+# no la tenemos instalada, podemos instalar la librería 'pacman', que nos permi-
+# te activar las librerías que necesitemos y, en caso de no tenerlas, las insta-
+# la automáticamente:
+
+install.packages('pacman', dependencies=T)
+library('pacman')
+
+# Dentro de la librería 'pacman' está la función 'p_load', que nos permite acti-
+# var y, en su defecto, instalar librerías y abrirlas. Así, tenemos:
+
+p_load(gtools)
+
+# El paquete 'gtools' nos permite hacer los cálculos necesarios para establecer
+# combinatorias que exigen el conteo de caracteres y magnitudes numéricas va-
+# rias. Por ejemplo, para el caso de la combinatoria, procedemos como se expresa
+# a continuación:
+
+n <- 8
+k <- 4
+
+permutacion(8,4)
+
+# Recordemos que la combinatoria establece el número de elementos, dado por 'n',
+# y el número de elementos que efectivamente se combinan, dado por 'k'. Si defi-
+# nimos el objeto 'letras' como un conjunto con ocho elementos:
+
+letras <- c('a','b','c','d','e','f','g','h')
+
+# Luego, establecemos una función extensiva de permutaciones en los siguientes
+# términos:
+
+permutaciones <- permutations(n,k,letras)
+
+# Mostramos los primeros y los últimos resultados de 'permutaciones':
+
+head(permutaciones)
+tail(permutaciones)
+str(permutaciones)
+
+# De esta forma, se comprueba que la función creada de permutación con la fun-
+# ción 'permutations' de 'gtools' dan el mismo resultado.
+
+# Ahora, pasamos a las combinaciones, entendidas como un proceso de tomar obje-
+# si el orden en que estos son tomados no nos importa. De este modo, ocupamos
+# nuevamente la función 'function', pero para crear una función de combinatoria:
+
+combinatoria <- function(n,k){
+  return(factorial(n)/(factorial(k)*factorial(n - k)))
+}
+
+combinatoria(8,4)
+
+# De este modo, hemos construido la función 'combinatoria' que es igual a la 
+# ecuación Ck^n = n!/((n - k)!*k!). Volvamos a las funciones de permutación an-
+# examinadas, pero para aplicarlas como combinatoria:
+
+combinaciones <- combinations(n,k,letras)
+combinaciones
+
+head(combinaciones)
+tail(combinaciones)
+str(combinaciones)
+
+# De esta forma, se ha comprobado que la función 'combinación' ha trabajado ade-
+# cuadamente.
+
+# ------------------------------------------------------------------------------
+# 3. Probabilidades.----
+# ------------------------------------------------------------------------------
+
+# Las probabilidades tienen tres perspectivas que son del uso más común: clási-
+# ca, frecuentista y subjetiva. La primera se refiere a cómo se concibe la pro-
+# babilidad en función del azar. La segunda hace mención a la idea de entender
+# las probabilidades como frecuencias relativas dentro de un espacio muestral, 
+# y la visión subjetiva tiene que ver con el juicio personal probabilístico que
+# hace cualquier persona ante una situación específica sin calcular una proba-
+# bilidad específica necesariamente.
+
+# En este sentido, el ejemplo más clásico para posicionar el tema de probabili-
+# dades es el del lanzamiento de las monedas, a fin de definir cuántas caras y 
+# sellos obtenemos en un total definido de lanzamientos. Para este ejercicio,
+# diseñemos una simulación:
+
+moneda <- c('cara','sello')
+m <- seq(10,10000,by=10)
+l <- length(m)
+
+# Tenemos los resultados posibles del lanzamiento de una moneda, la secuencia
+# que esta debe seguir y la cantidad de experimentos a realizar. Posteriormente,
+# preparamos un bucle 'for' que nos permita generar los resultados simulados:
+
+ex <- vector('list',l) 
+
+for(i in 1:l){
+  resultado <- sample(moneda, m[i], replace = T, prob = c(0.5, 0.5))
+  cara <- (table(resultado)/m[i])[1] 
+  sello <- (table(resultado)/m[i])[2]
+  tabla <- data.frame(m = m[i], cara = cara, sello = sello)
+  ex[[i]] <- tabla
+}
+
+View(tabla)
+
+# Al activar el comando 'View', podemos obtener los resultados de la simulación.
+
+# ------------------------------------------------------------------------------
+# 4. Gráfico de demostración.----
+# ------------------------------------------------------------------------------
+
+# Visto lo revisado en el apartado anterior, revisemos gráficamente la simula-
+# ción del ítem 3:
+
+tabla_prob <- do.call(rbind, ex)
+
+plot(tabla_prob$m,
+     tabla_prob$cara,
+     type = 'l',
+     lwd = 1,
+     col = 'blue',
+     xlab = 'Número de lanzamiento',
+     ylab = 'Probabilidad de cara')
+
+abline(h = 0.5, col = 'red')
+
+# Este es el principio de la probabilidad como frecuencia relativa, la aplica-
+# ción del concepto de variable aleatoria, y además tenemos la intuición del
+# Teorema de Bayes, el que veremos la próxima clase con diagrama de árbol.
+
+
+# ------------------------------------------------------------------------------
+# 1. Conjuntos como probabilidades.----
+# ------------------------------------------------------------------------------
+
+# Recordemos que el Teorema de Bayes consiste en una fórmula que nos permite 
+# calcular, a partir de un evento definido, indicando sus probabilidades a pos-
+# teriori para escenarios en los que se obtiene un éxito y un fracaso, los que,
+# a su vez, puede generar nuevas probabilidades. Esto se deduce de la teoría de
+# conjuntos vista en la práctica anterior. Supongamos un conjunto A, un conjunto
+# U y un conjunto B:
+
+U <- c('a','b','c','d','e','f','g','h','i','j','k','l')
+A <- c('a','b','c','d','e')
+B <- c('e','f','g','h')
+
+# Una vez obtenidos los tres conjuntos, calculemos la cardinalidad (número de 
+# elementos) que tiene cada uno, de manera que convirtamos todo en una relación
+# numérica:
+
+AUB <- length(union(A,B)) # Unión de A y B.
+AUB
+
+AIB <- length(intersect(A,B)) # Intersección de A y B.
+AIB
+
+CDA <- length(setdiff(U,A)) # Complemento de A.
+CDA
+
+CDB <- length(setdiff(U,B)) # Complemento de B.
+CDB
+
+CD_AUB <- length(setdiff(U,union(A,B))) # Complemento de A unión B.
+CD_AUB
+
+CD_AIB <- length(setdiff(U,intersect(A,B))) # Complemento de A intersección B.
+CD_AIB
+
+BMA <- length(setdiff(B,A)) # B - A.
+BMA
+
+AMB <- length(setdiff(A,B)) # A - B.
+AMB
+
+LA <- length(A) # Cardinalidad de A.
+LA
+
+LB <- length(B) # Cardinalidad de B.
+LB
+
+LU <- length(U) # Cardinalidad de U.
+LU
+
+# Ahora que tenemos la cardinalidad de todas las combinaciones de interés, pro-
+# cedamos a convertir dichas cardinalidades en probabilidades a través de una
+# relación numérica de conjuntos. Recordemos que, en estos casos, nos interesa
+# la división entre el tipo de conjunto cuya probabilidad nos interesa y el
+# conjunto de la probabilidad total, dado por la cardinalidad de U:
+
+### Probabilidad de A:
+
+P_A <- LA/LU
+P_A
+
+### Probabilidad de B:
+
+P_B <- LB/LU
+P_B
+
+### Probabilidad de A unión B:
+
+P_AUB <- AUB/LU
+P_AUB
+
+### Probabilidad de A intersección B:
+
+P_AIB <- AIB/LU
+P_AIB
+
+### Probabilidad del complemento de A
+
+P_CDA <- CDA/LU
+P_CDA
+
+### Probabilidad del complemento de B:
+
+P_CDB <- CDB/LU
+P_CDB
+
+### Probabilidad de A - B:
+
+P_AMB <- AMB/LU
+P_AMB
+
+### Probabilidad de B - A:
+
+P_BMA <- BMA/LU
+P_BMA
+
+### Probabilidad del complemento de 'A unión B':
+
+P_CD_AUB <- CD_AUB/LU
+P_CD_AUB
+
+### Probabilidad del complemento de 'A intersección B':
+
+P_CD_AIB <- CD_AIB/LU
+P_CD_AIB
+
+# De este modo, tenemos las aplicaciones concretas de teoría de conjunto enlaza-
+# dos con probabilidades. De este modo, los elementos que nos interesan están
+# ligados a cómo podemos establecer y definir relaciones entre conjuntos, a fin
+# de calcular la probabilidad de cada conjunto, a los cuales llamaremos 
+# 'eventos' de ahora en adelante. A continuación, procedemos con la probabilidad
+# condicional, para luego entrar definitivamente en el Teorema de Bayes.
+
+# ------------------------------------------------------------------------------
+# 2. Probabilidad condicional y eventos.----
+# ------------------------------------------------------------------------------
+
+# La probabilidad condicional, enunciada como "A dado B" (P(A|B)), consiste en 
+# la probabilidad de un evento específico dado que se generó un evento anterior
+# que incide en la probabilidad del siguiente. De ahí el concepto de probabili-
+# dad condicional. Tenemos algunos ejercicios para aclarar mejor la idea:
+
+#### Probabilidad de A dado B (P(A|B)): es la división entre la probabilidad de
+#### A intersección B y la probabilidad de B, es decir, P(A & B)/P(B):
+
+# Se puede calcular las cardinalidades de ambos eventos, de modo tal que:
+
+P_ADB <- AIB/LB
+P_ADB
+
+# Se puede calcular con las probabilidades asignadas a cada evento. Tenemos que:
+
+PADB <- P_AIB/P_B
+PADB
+
+# Estas dos formas pueden ser aplicadas a todas las probabilidades condicionales
+# de interés. Prosigamos con los ejercicios restantes a partir de las probabili-
+# dades asignadas a cada evento:
+
+### Probabilidad de B dado A (P(B|A)):
+
+P_BDA <- P_AIB/P_A
+P_BDA
+
+### Probabilidad de la intersección del complemento de A y B (A^c & B) dado B 
+### (P(A^c & B)/P(B)):
+
+# Para resolver este ejercicio, obtengamos primero la intersección entre el com-
+# plemento de A y B:
+
+CAIB <- length(intersect(setdiff(U,A),B))
+CAIB
+
+# Luego, obtenemos la probabilidad de la intersección señalada:
+
+P_CAIB <- CAIB/LU
+P_CAIB
+
+# Finalmente, calculamos la probabilidad condicional P(A^c & B)/P(B):
+
+P_BDCAIB <- P_CAIB/P_B
+P_BDCAIB
+
+
+### Vamos a verificar si P(A & B) es igual a P(A)*P(B). Si esta igualdad se da,
+### entonces los eventos son independientes entre sí. Verifiquemos:
+
+PI <- print(P_AIB == P_A * P_B)
+
+# Como no son iguales, entonces estos eventos no son independientes.
+
+
+# ------------------------------------------------------------------------------
+# 3. Teorema de Bayes.-----
+# ------------------------------------------------------------------------------
+
+# El teorema de Bayes, formulado por el presbítero inglés sir Thomas Bayes,
+# nos indica la probabilidad de que un evento ocurra dado que se desarrolló un
+# evento anterior, por lo cual queremos conocer la probabilidad de los efectos,
+# así como aquella que estos efectos producen en otros eventos, lo que dará lu-
+# gar a nuevas probabilidades a posteriori. Hagamos una aplicación de este teo-
+# rema.
+
+# 1. A continuación, tenemos tres urnas disponibles para un estudio de comporta-
+#    miento electoral que contienen los votos de dos candidatos. Una vez ingre-
+#    sados los sufragios, tenemos los siguientes resultados:
+# 
+#    Urna 1: 3 votos para el candidato A, y 5 para el candidato B.
+#    Urna 2: 6 votos para el candidato A, y 3 para el candidato B.
+#    Urna 3: 2 votos para el candidato A, y 4 para el candidato B.
+# 
+#    Para estudiar la incidencia del conteo de votos en las expectativas electo-
+#    rales, se ejecuta un experimento aleatorio en el cual cada urna tiene la 
+#    misma probabilidad de ser elegida para extraer un voto, tras lo cual el
+#    presidente de la mesa electoral extrae un voto. Si el resultado del experi-
+#    mento es que se sacó un voto por el candidato A, entonces:
+# 
+#    1. ¿Cuál es la probabilidad de que el voto del candidato A haya sido extra-
+#       ído de la tercera urna?
+#    2. Calcule lo mismo, pero para las otras dos urnas.
+
+### Ejercicio desarrollado
+
+# Tenemos que la fórmula es la siguiente:
+
+# P(A|B) = (P(B|A)*P(A))/P(B)
+
+# Análogamente, tenemos que:
+
+# P(B|A) = (P(A|B)*P(B))/P(A)
+
+# Entonces, tenemos un evento condicional que da lugar a otro, con un efecto
+# definido numéricamente. Si tenemos que las tres urnas tienen la misma proba-
+# bilidad de ser elegidas, entonces cada una tiene 1/3 de probabilidades de 
+# ser elegidas. Por esto, tenemos tres objetos:
+
+P_U1 <- 1/3
+P_U2 <- 1/3
+P_U3 <- 1/3
+
+# Luego, calculamos la probabilidad del candidato A, dado cada urna. En la pri-
+# mera, tenemos un total de tres entre ocho, en la segunda de seis entre nueve
+# y en la tercera de dos entre seis. Así, tenemos que:
+
+PA_U1 <- 3/8
+PA_U2 <- 6/9
+PA_U3 <- 2/6
+
+# Luego, aplicamos la fórmnula del teorema de Bayes, a fin de preparar la red 
+# completa de probabilidades, y así despejar el elemento que nos interesa. De
+# este modo sumamos la probabilidad total como denominador, y el numerador con
+# la probabilidad de cada tramo del arbol de decisión:
+
+TBU1A <- print((PA_U1 * P_U1)/((PA_U1 * P_U1) + (PA_U2 * P_U2) + (PA_U3 * P_U3)))
+
+TBU2A <- print((PA_U2 * P_U2)/((PA_U1 * P_U1) + (PA_U2 * P_U2) + (PA_U3 * P_U3)))
+
+TBU3A <- print((PA_U3 * P_U3)/((PA_U1 * P_U1) + (PA_U2 * P_U2) + (PA_U3 * P_U3)))
+
+# Esta vez, intentemos hacer lo mismo para el candidato B para las tres urnas:
+
+PB_U1 <- 5/8
+PB_U2 <- 3/9
+PB_U3 <- 4/6
+
+# También aplicamos el teorema de Bayes para el candidato B:
+
+TBU1B <- print((PB_U1 * P_U1)/((PB_U1 * P_U1) + (PB_U2 * P_U2) + (PB_U3 * P_U3)))
+
+TBU2B <- print((PB_U2 * P_U2)/((PB_U1 * P_U1) + (PB_U2 * P_U2) + (PB_U3 * P_U3)))
+
+TBU3B <- print((PB_U3 * P_U3)/((PB_U1 * P_U1) + (PB_U2 * P_U2) + (PB_U3 * P_U3)))
+
+# Para comprobar el ejercicio, las probabilidades de todos los niveles del 
+# árbol de decisión nos tiene que dar 1,0.
+
+print(TBU1A + TBU2A + TBU3A)
+print(TBU1B + TBU2B + TBU3B)
+
+
+# ------------------------------------------------------------------------------
+# 1. Distribución binomial.----
+# ------------------------------------------------------------------------------
+
+# La distribución binomial se aplica para una serie de experimentos en donde
+# tenemos una cantidad de ensayos (n), así como una tasa de éxito dada por p, 
+# y una tasa de fracasos dada por 1 - p.
+
+n <- 15
+x <- 0:n
+p <- 3/100
+
+prob <- dbinom(x, n, p, log = F)
+
+sum(prob)
+
+# Esperanza matemática y varianza de la distribución binomial.
+
+EX <- sum(prob * x)
+EX
+
+VarX <- sum(x^2 * prob) - EX^2
+VarX
+
+# ------------------------------------------------------------------------------
+# 2. Distribución de Poisson.----
+# ------------------------------------------------------------------------------
+
+# Esta distribución considera, habitualmente, una cantidad promedio que se gene-
+# ra en un tiempo estipulado, y cómo se altera esa probabilidad si se define un
+# valor promedio diferente. Por ejemplo, e es un valor definido como el número
+# promedio de un fenómeno que se produce en una cantidad de tiempo establecida,
+# y lambda es la cantidad de veces que un suceso se repite en dicha cantidad de
+# tiempo. Por ejemplo
+
+x <- 5
+lambda <- 10
+
+dpois(x, lambda, log = F)
+
+# La esperanza matemática y la varianza convergen en lambda.
+
+
+# ------------------------------------------------------------------------------
+# 3. Distribución de Bernoulli.----
+# ------------------------------------------------------------------------------
+
+# La distribución de Bernoulli es una aplicación específica de la distribución
+# binomial en el que se aplica un solo experimento con una probabilidad especí-
+# fica de ocurrencia. No obstante, como R no contempla en su paquete base la
+# función, nos obliga a recurrir un paquete llamado "Rlab".
+
+library(pacman)
+p_load(Rlab)
+
+x <- seq(1, 10, by = 1)
+
+dbern(x, prob = 0.7)
+
+# De este modo, se puede puede aplicar, por ejemplo, a la probabilidad de obte-
+# ner cara en un único lanzamiento.
+
+# La esperanza matemática está dada por p y la varianza por p*(1 - p).
+
+# ------------------------------------------------------------------------------
+# 4. Distribución normal.----
+# ------------------------------------------------------------------------------
+
+# La distribución normal consiste en la función de densidad de probabilidad más
+# relevante de la estadística. Lo que nos indica, en muy resumidas cuentas, es
+# la probabilidad de que un valor de x se ubique en un intervalo definido, dado
+# por un área bajo la curva de la función de densidad antes señalada. La fun-
+# ción que nos permite expresarla gráficamente es la siguiente:
+
+prob_norm <- function(mean, sd, lb, ub){
+  x <- seq(-4, 4, length = 100) * sd + mean
+  hx <- dnorm(x, mean, sd)
+  
+  plot(x, hx, type = 'n', xlab = 'valores de X', ylab = 'f(x)', 
+       main = expression(paste(X %~% N(mu, sigma^2))), las = 1, axes = F)
+  
+  i <- x >= lb & x <= ub
+  lines(x, hx)
+  polygon(c(lb, x[i], ub), c(0, hx[i], 0), col = 'blue')
+  area <- rm(ub, mean, sd) - pnorm(lb, mean, sd)
+  result <- paste('P(', lb, '< X <', ub, ') = ', signif(area, digits = 4))
+  mtext(result, 3)
+  axis(1, at = trunc(seq(min(x), max(x), 20)), pos = 0)
+  text(x[15], hx[40], expression(paste(frac(1, sqrt(2 * pi * sigma^2)), ' ',
+                                       plain(e)^{frac(-(-x-mu)^2, 2*sigma^2)})),
+       cex = 1.2)
+}
+
+# Generamos el gráfico que hemos cargado antes, pero para una serie de valores
+# cualquiera.
+
+prob_norm(mean = 4, sd = 1.5, lb = 0, ub = 2)
+
+
+# Ahora, revisamos los valores de la distribución normal estándar conforme lo
+# comentamos en la clase anterior desde 0 a 3 sigma.
+
+prob_norm(mean = 0, sd = 1, lb = -1, ub = 1)
+
+prob_norm(mean = 0, sd = 1, lb = -2, ub = 2)
+
+prob_norm(mean = 0, sd = 1, lb = -3, ub = 3)
+
+# Luego, generamos un gráfico, pero para revisar como se comporta la distribu-
+# ción normal acumulada.
+
+prob_acum_norm <- function(mean, sd)
+{
+  x <- seq(-4,4,length=100)*sd + mean
+  hx <- dnorm(x,mean,sd)
+  curve(pnorm(x,mean,sd),
+        xlim=c(min(x),max(x)),
+        col="blue",
+        lwd=2,
+        xlab="x",
+        ylab="F(x)",
+        main=paste("Función de Probabilidad N(",mean, ",",sd, ")", sep =""))
+}
+
+# Se revisa la distribución normal acumulada con media = 170 y desviación están-
+# dar igual a 2.
+
+prob_acum_norm(170, 2)
+
+# Revisamos la distribución acumulada con mu = 0 y sigma = 1.
+
+prob_acum_norm(0, 1)
+
+
+# ------------------------------------------------------------------------------
+# 1. Recordatorio distribución normal.----
+# ------------------------------------------------------------------------------
+
+# Primero, constituimos una función gráfica de distribución normal estándar, 
+# a fin de que podamos trabajar diversos ejercicios y problemas de probabilida-
+# des:
+
+library(grDevices)
+
+normal_area <- function(mean = 0, sd = 1, lb, ub, acolor = "lightgray", ...) {
+  x <- seq(mean - 3 * sd, mean + 3 * sd, length = 100) 
+  
+  if (missing(lb)) {
+    lb <- min(x)
+  }
+  if (missing(ub)) {
+    ub <- max(x)
+  }
+  
+  x2 <- seq(lb, ub, length = 100)    
+  plot(x, dnorm(x, mean, sd), type = "n", ylab = "")
+  
+  y <- dnorm(x2, mean, sd)
+  polygon(c(lb, x2, ub), c(0, y, 0), col = acolor)
+  lines(x, dnorm(x, mean, sd), type = "l", ...)
+}
+
+
+# ------------------------------------------------------------------------------
+# 2. Ejercicio distribución normal estándar.----
+# ------------------------------------------------------------------------------
+
+# Dibuje la gráfica de la distribución normal estándar. Etiquete el eje horizon-
+# tal con los valores -3, -2, -1, 0, 1, 2 y 3. Después, calcule las áreas de
+# los siguientes valores:
+
+# 1. P(z <= 1.5)
+
+normal_area(mean = 0, sd = 1, ub = 1.5, acolor = rgb(0, 0, 1, alpha = 0.6))
+print(pnorm(1.5, 0, 1, lower.tail = T))
+
+# 2. P(z <= 1.0)
+
+normal_area(mean = 0, sd = 1, ub = 1.0, acolor = rgb (0, 0, 1, alpha = 0.6))
+print(pnorm(1.0, 0, 1, lower.tail = T))
+
+# 3. P(1.0 <= z <= 1.5)
+
+normal_area(mean = 0, sd = 1, lb = 1.0, ub = 1.5,
+            acolor = rgb(0, 0, 1, alpha = 0.6))
+print(pnorm(1.5, 0, 1, lower.tail = T) - pnorm(1.0, 0, 1, lower.tail = T))
+
+# 4. P(0.0 < z < 2.0)
+
+normal_area(mean = 0, sd = 1, lb = 0.0, ub = 2.0,
+            acolor = rgb(0, 0, 1, alpha = 0.6))
+print(1 - pnorm(2.0, 0, 1, lower.tail = F)) - 
+  print(1 - pnorm(0.0, 0, 1, lower.tail = F))
+
+
+# ------------------------------------------------------------------------------
+# 3. Ejercicio distribución normal de una media.----
+# ------------------------------------------------------------------------------
+
+# Calcular media muestra a partir de una media poblacional de 200 y una desvia-
+# ción estándar poblacional de 50. Se toman 100 muestras para completar el ejer-
+# cicio. Se pide.
+
+# 1. Calcular la media.
+
+Ex <- 200
+
+# 2. Calcular la desviación estándar.
+
+SDx <- 50/sqrt(100)
+
+# 3. Obtener la distribución de x barra.
+
+normal_area(mean = 200, sd = 5.0, acolor = rgb(0,0,1, alpha = 0.6))
+
+# 4. Significado de la distribución de x barra: la distribución muestra el com-
+#    portamiento que tendría la población a partir de 100 muestras, de las cua-
+#    se calculó la media para cada una de ellas, y luego la desviación estándar.
+#    Todo lo anterior se hizo a partir de datos poblacionales, con lo cual la 
+#    media sería representativa de la población.
+
+
+# ------------------------------------------------------------------------------
+# 5. Ejercicio distribución de una proporción.----
+# ------------------------------------------------------------------------------
+
+# De una muestra de tamaño 100 en que p = 0.40.
+
+# 1. ¿Cuál es el valor esperado de p barra?
+
+p_barra <- 0.40
+
+muestra <- 100
+
+# 2. ¿Cuál es el error estándar de p barra?
+
+p_es <- sqrt((p_barra * (1 - p_barra))/muestra)
+p_es
+
+# 3. Graficar la distribución de p barra.
+
+normal_area(mean = p_barra, sd = p_es, acolor = rgb(0,0,1, alpha = 0.5))
+
+# 4. ¿Qué indica la distribución muestral de p barra?
+
+# Indica que la distribución de la proporción respecto de la población sería,
+# en principio, representativa de la distribución poblacional.
+
+
+# ¿Cuál es la probabilidad de que P(-0.3 < z < 0.3) de la proporción problacio-
+# nal?
+
+normal_area(mean = p_barra, sd = p_es, lb = -0.03, ub = 0.03,
+            acolor = rgb(0,0,1, alpha = 0.4))
+print(1 - pnorm(0.03, 0, 1, lower.tail = F)) - 
+  print(1 - pnorm(-0.03, 0, 1, lower.tail = F))
+
+
+# Suponga que la proporción poblacional es 0.55 ¿Cuál es el error estándar de la
+# proporción para muestras de 100, 200, 500 y 1.000?
+
+# Ahora, suponga que la proporción poblacional es 0.30 ¿Cuál es la probabilidad
+# de que las distribuciones muestral y poblacional entre -0.04 y 0.04 con 
+# muestras de 100, 200, 500 y 1.000?
+
+# Finalmente, establezca la ventaja de tener muestras grandes.
+
+################################################################################
+################################################################################
+################################################################################
+################################################################################
